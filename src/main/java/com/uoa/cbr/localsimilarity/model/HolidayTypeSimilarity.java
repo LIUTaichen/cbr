@@ -1,6 +1,6 @@
 package com.uoa.cbr.localsimilarity.model;
 
-import com.uoa.cbr.localsimilarity.LocalSimilarityFunction;
+import com.uoa.cbr.localsimilarity.similarityfunctions.LocalSimilarityFunction;
 
 public class HolidayTypeSimilarity extends LocalSimilarityFunction {
 	

@@ -10,32 +10,29 @@
 <h:head>
 </h:head>
 <h:body>
-	<h1>Holiday Type Similarity Matrix</h1>
+	<h1>Transportation Similarity Matrix</h1>
 	<h:form>
 		<div>
-			<p:dataTable
-				value="#{holidayTypeSimilarityMatrixBean.holidayTypeValues}"
-				var="targetValue" rowIndexVar="rowIndex">
+			<p:dataTable value="#{transportationSimilarityMatrixBean.transportationValues}"
+				var="targetValue" rowIndexVar="rowIndex" id="matrixTable">
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="targetValue" />
 					</f:facet>
 					<h:outputText value="#{targetValue}" />
 				</p:column>
-				<p:columns
-					value="#{holidayTypeSimilarityMatrixBean.holidayTypeValues}"
+				<p:columns value="#{transportationSimilarityMatrixBean.transportationValues}"
 					var="sourceValue" columnIndexVar="colIndex">
 					<f:facet name="header">
 						<h:outputText value="#{sourceValue}" />
 					</f:facet>
 					<p:inputText
-						value="#{holidayTypeSimilarityMatrixBean.matrix[rowIndex][colIndex].similarity}" />
+						value="#{transportationSimilarityMatrixBean.matrix[rowIndex][colIndex].similarity}" />
 				</p:columns>
 			</p:dataTable>
 		</div>
 		<div>
-			<p:commandButton value="Save"
-				action="#{holidayTypeSimilarityMatrixBean.onSave}"></p:commandButton>
+			<p:commandButton id="save" value="Save" action="#{transportationSimilarityMatrixBean.onSave}"></p:commandButton>
 		</div>
 		<p:ajaxStatus onstart="PF('statusDialog').show()"
 			onsuccess="PF('statusDialog').hide()" />

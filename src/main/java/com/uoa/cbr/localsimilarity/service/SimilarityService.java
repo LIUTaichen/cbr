@@ -53,5 +53,14 @@ public class SimilarityService {
 		 query.setParameter("arg1", valueType);
 		 return query.getResultList();
 	 }
+	 
+	 public List<SimilarityMatrix> find(String valueType, String sourceValue, String targetValue){
+		 Query query = em.createQuery("Select sm from SimilarityMatrix sm where sm.valueType=:arg1 and sm.sourceValue = :arg2 and sm.targetValue=:arg3" , SimilarityMatrix.class);
+		 query.setParameter("arg1", valueType);
+		 query.setParameter("arg2", sourceValue);
+		 query.setParameter("arg3", targetValue);
+		 List<SimilarityMatrix> resultList = query.getResultList();
+		 return resultList;
+	 }
 
 }

@@ -1,5 +1,6 @@
 package com.uoa.cbr.cases;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -10,19 +11,21 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.uoa.cbr.cases.service.TravelCaseService;
-import com.uoa.cbr.localsimilarity.SimilarityMatrixBean;
+import com.uoa.cbr.localsimilarity.similaritymatrix.HolidayTypeSimilarityMatrixBean;
 
 @Controller
 @Scope("request")
 public class RecommendationBean {
 	
-	private static final String ACCOMMODATION_COLUMN_NAME = "Accommodation";
+	private static final String ACCOMMODATION_COLUMN_NAME = "accommodation";
+	
+	private static final String REGION_COLUMN_NAME = "region";
 
-	private static final String SEASON_COLUMN_NAME = "Season";
+	private static final String SEASON_COLUMN_NAME = "season";
 
-	private static final String TRANSPORTATION_COLUMN_NAME = "Transportation";
+	private static final String TRANSPORTATION_COLUMN_NAME = "transportation";
 
-	private static final String HOLIDAY_TYPE_COLUMN_NAME = "HolidayType";
+	private static final String HOLIDAY_TYPE_COLUMN_NAME = "holidayType";
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,7 +33,7 @@ public class RecommendationBean {
 
 	private String holidayType;
 	
-	private String price;
+	private Integer price;
 	
 	private Integer numberOfPersons;
 	
@@ -48,11 +51,15 @@ public class RecommendationBean {
 	
 	private List<String> holidayTypeValueList;
 	
+	private List<String> regionValueList;
+	
 	private List<String> transportationValueList;
 	
 	private List<String> seasonValueList;
 	
 	private List<String> accommodationValueList;
+	
+	private List<TravelCase> nearestNeighbours;
 	
 	
 	@Autowired
@@ -61,9 +68,40 @@ public class RecommendationBean {
 	@PostConstruct
 	public void init() {
 		holidayTypeValueList = travelCaseService.getValueList(HOLIDAY_TYPE_COLUMN_NAME);
+		setRegionValueList(travelCaseService.getValueList(REGION_COLUMN_NAME));
 		transportationValueList = travelCaseService.getValueList(TRANSPORTATION_COLUMN_NAME);
-		seasonValueList = travelCaseService.getValueList(SEASON_COLUMN_NAME);
+		seasonValueList = new ArrayList<String>();
+		seasonValueList.add("January");
+		seasonValueList.add("February");
+		seasonValueList.add("March");
+		seasonValueList.add("April");
+		seasonValueList.add("May");
+		seasonValueList.add("June");
+		seasonValueList.add("July");
+		seasonValueList.add("August");
+		seasonValueList.add("September");
+		seasonValueList.add("October");
+		seasonValueList.add("November");
+		seasonValueList.add("December");
+		
 		accommodationValueList = travelCaseService.getValueList(ACCOMMODATION_COLUMN_NAME);
+	}
+	
+	public String onSubmit(){
+		logger.info("making recommendation");
+		TravelCase targetCase = new TravelCase();
+		targetCase.setAccommodation(accommodation);
+		targetCase.setDuration(duration);
+		targetCase.setHolidayType(holidayType);
+		targetCase.setHotel(hotel);
+		targetCase.setNumberOfPersons(numberOfPersons);
+		targetCase.setPrice(price);
+		targetCase.setRegion(region);
+		targetCase.setSeason(season);
+		targetCase.setTransportation(transportation);
+		nearestNeighbours = travelCaseService.getRecommendation(targetCase);
+		
+		return "Recommendation";
 	}
 	
 	public String getHolidayType() {
@@ -74,11 +112,11 @@ public class RecommendationBean {
 		this.holidayType = holidayType;
 	}
 
-	public String getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
@@ -172,6 +210,22 @@ public class RecommendationBean {
 
 
 
+
+	public List<String> getRegionValueList() {
+		return regionValueList;
+	}
+
+	public void setRegionValueList(List<String> regionValueList) {
+		this.regionValueList = regionValueList;
+	}
+
+	public List<TravelCase> getNearestNeighbours() {
+		return nearestNeighbours;
+	}
+
+	public void setNearestNeighbours(List<TravelCase> nearestNeighbours) {
+		this.nearestNeighbours = nearestNeighbours;
+	}
 	
 
 }

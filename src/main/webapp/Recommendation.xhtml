@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h1>Please enter the details for desired travel.</h1>
+	<h:form>
+		<p:panel id="panel" header="Travel Details">
+			<div>
+				<p:messages showSummary="true"></p:messages>
+			</div>
+			<h:panelGrid columns="2" cellpadding="5">
+
+				<p:outputLabel for="hp" value="Holiday Type: ">
+				</p:outputLabel>
+				<p:selectOneMenu id="hp" value="#{recommendationBean.holidayType}"
+					required="true">
+					<f:selectItems value="#{recommendationBean.holidayTypeValueList}" />
+				</p:selectOneMenu>
+				<p:outputLabel value="Price: " for="price">
+				</p:outputLabel>
+				<p:inputText id="price" required="true"
+					value="#{recommendationBean.price}" />
+				<p:outputLabel value="Number of Persons: " for="nop">
+				</p:outputLabel>
+				<p:inputText id="nop" value="#{recommendationBean.numberOfPersons}"
+					label="Number of Persons:" />
+				<p:outputLabel value="Region: " for="region">
+				</p:outputLabel>
+				<p:selectOneMenu required="true"
+					value="#{recommendationBean.region}" id="region">
+					<f:selectItems value="#{recommendationBean.regionValueList}" />
+				</p:selectOneMenu>
+				<p:outputLabel value="Transportation: " for="trans">
+				</p:outputLabel>
+				<p:selectOneMenu required="true"
+					value="#{recommendationBean.transportation}" id="trans">
+					<f:selectItems
+						value="#{recommendationBean.transportationValueList}" />
+				</p:selectOneMenu>
+				<p:outputLabel value="Duration: " for="duration">
+				</p:outputLabel>
+				<p:inputText required="true" value="#{recommendationBean.duration}"
+					id="duration" />
+				<p:outputLabel value="Season: " for="season">
+				</p:outputLabel>
+				<p:selectOneMenu required="true"
+					value="#{recommendationBean.season}" id="season">
+					<f:selectItems value="#{recommendationBean.seasonValueList}" />
+				</p:selectOneMenu>
+				<p:outputLabel value="Accommodation: " for="acco">
+				</p:outputLabel>
+				<p:selectOneMenu required="true"
+					value="#{recommendationBean.accommodation}" id="acco">
+					<f:selectItems value="#{recommendationBean.accommodationValueList}" />
+				</p:selectOneMenu>
+				<p:outputLabel value="Hotel: " for="hotel">
+				</p:outputLabel>
+				<p:inputText required="true" value="#{recommendationBean.hotel}"
+					id="hotel" />
+			</h:panelGrid>
+		</p:panel>
+		<div>
+			<p:commandButton value="Submit"
+				action="#{recommendationBean.onSubmit}" update="panel resultTable"></p:commandButton>
+		</div>
+
+		<p:dataTable value="#{recommendationBean.nearestNeighbours}"
+			var="travelCase" rowIndexVar="index" id="resultTable"
+			rendered="#{!recommendationBean.nearestNeighbours.isEmpty}">
+			<f:facet name="header">
+       	 Recommendated Travel Plans
+    </f:facet>
+			<p:column headerText="Index">
+				<h:outputText value="#{index}" />
+			</p:column>
+			<p:column headerText="Holiday Type">
+				<h:outputText value="#{travelCase.holidayType}" />
+			</p:column>
+			<p:column headerText="Price">
+				<h:outputText value="#{travelCase.price}" />
+			</p:column>
+			<p:column headerText="Number of Persons">
+				<h:outputText value="#{travelCase.numberOfPersons}" />
+			</p:column>
+			<p:column headerText="region">
+				<h:outputText value="#{travelCase.region}" />
+			</p:column>
+			<p:column headerText="Transportation">
+				<h:outputText value="#{travelCase.transportation}" />
+			</p:column>
+			<p:column headerText="Duration">
+				<h:outputText value="#{travelCase.duration}" />
+			</p:column>
+			<p:column headerText="Season">
+				<h:outputText value="#{travelCase.season}" />
+			</p:column>
+			<p:column headerText="Accommodation">
+				<h:outputText value="#{travelCase.accommodation}" />
+			</p:column>
+			<p:column headerText="Hotel">
+				<h:outputText value="#{travelCase.hotel}" />
+			</p:column>
+		</p:dataTable>
+		
+		<p:commandButton value="Holiday Type Similarity Matrix" action="HolidayTypeMatrix" process="@this" />
+		<p:commandButton value="Transport Similarity Matrix" action="TransportationMatrix" process="@this" />
+		<p:commandButton value="Season Similarity Matrix" action="SeasonMatrix" process="@this" />
+		<p:commandButton value="Accommodation Similarity Matrix" action="AccommodationMatrix" process="@this" />
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage name="images/ajaxloadingbar.gif" />
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table
@@ -47,6 +48,19 @@ public class TravelCase {
 	@Column(name = "Hotel")
 	private String hotel;
 	
+	@Transient
+	private Double similarity;
+	
+
+	public Double getSimilarity() {
+		return similarity;
+	}
+
+
+	public void setSimilarity(Double similarity) {
+		this.similarity = similarity;
+	}
+
 
 	public int getCaseId() {
 		return caseId;
@@ -147,7 +161,7 @@ public class TravelCase {
 		this.hotel = hotel;
 	}
 
-
+	
 
 
 }
