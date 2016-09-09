@@ -24,7 +24,7 @@ public class TravelCaseService {
 	private EntityManager em;
 	
 	@Autowired
-	GlobalSimilarityFunction similarityFunction;
+	private GlobalSimilarityFunction similarityFunction;
 	
 	 public List<TravelCase> listAll() {
 	        return em.createQuery("SELECT u FROM TravelCase u", TravelCase.class).getResultList();
@@ -40,7 +40,7 @@ public class TravelCaseService {
 			for(TravelCase travelCase: allCases){
 				travelCase.setSimilarity(similarityFunction.getSimilarity(targetCase, travelCase));
 			}
-			Collections.sort(allCases, new SimilarityComparator());
+			Collections.sort(allCases, Collections.reverseOrder(new SimilarityComparator()));
 			
 			List<TravelCase> resultList = new ArrayList<TravelCase>();
 			for(int i = 0; i <5; i ++){

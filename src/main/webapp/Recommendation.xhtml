@@ -71,15 +71,21 @@
 			<p:commandButton value="Submit"
 				action="#{recommendationBean.onSubmit}" update="panel resultTable"></p:commandButton>
 		</div>
-
+		<br/>
+		<br/>
 		<p:dataTable value="#{recommendationBean.nearestNeighbours}"
 			var="travelCase" rowIndexVar="index" id="resultTable"
-			rendered="#{!recommendationBean.nearestNeighbours.isEmpty}">
+			rendered="#{!recommendationBean.nearestNeighbours.isEmpty()}">
 			<f:facet name="header">
        	 Recommendated Travel Plans
     </f:facet>
 			<p:column headerText="Index">
-				<h:outputText value="#{index}" />
+				<h:outputText value="#{index +1}" />
+			</p:column>
+			<p:column headerText="Similarity">
+				<h:outputText value="#{travelCase.similarity}" >
+				<f:convertNumber pattern="#0.00" />
+				</h:outputText>
 			</p:column>
 			<p:column headerText="Holiday Type">
 				<h:outputText value="#{travelCase.holidayType}" />
@@ -109,7 +115,9 @@
 				<h:outputText value="#{travelCase.hotel}" />
 			</p:column>
 		</p:dataTable>
-		
+		<br/>
+		<br/>
+		<h2>Similarity Matrix Configuration</h2>
 		<p:commandButton value="Holiday Type Similarity Matrix" action="HolidayTypeMatrix" process="@this" />
 		<p:commandButton value="Transport Similarity Matrix" action="TransportationMatrix" process="@this" />
 		<p:commandButton value="Season Similarity Matrix" action="SeasonMatrix" process="@this" />

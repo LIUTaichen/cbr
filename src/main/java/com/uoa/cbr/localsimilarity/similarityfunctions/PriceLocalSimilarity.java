@@ -15,16 +15,16 @@ public class PriceLocalSimilarity extends LocalSimilarityFunction{
 	@Override
 	public Double getSimilarity(String targetValue, String sourceValue){
 		
-		Double targetIntValue = Double.valueOf(targetValue);
-		Double sourceIntValue = Double.valueOf(sourceValue);
+		Double targetDoubleValue = Double.valueOf(targetValue);
+		Double sourceDoubleValue = Double.valueOf(sourceValue);
 		
-		if((sourceIntValue / targetIntValue) > 1.1){
+		if((sourceDoubleValue / targetDoubleValue) > 1.1){
 			return 0.0;
-		}else if(sourceIntValue <= targetIntValue){
+		}else if(sourceDoubleValue <= targetDoubleValue){
 			return 1.0;
 			
 		}else {
-			return 1 - ((sourceIntValue - targetIntValue) * 10) / targetIntValue;
+			return 1 - ((sourceDoubleValue - targetDoubleValue) * 10) / targetDoubleValue;
 		}
 	}
 

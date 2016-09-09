@@ -23,7 +23,13 @@ public class DurationSimilarity extends LocalSimilarityFunction{
 			durationDifference = -durationDifference;
 		}
 		
-		return 1 - ((durationDifference) * 10) / targetDoubleValue;
+		Double similarity = 1 - ((durationDifference) * 10) / targetDoubleValue;
+		if(similarity > 0){
+			return similarity;
+		}else{
+			return 0.0;
+		}
+		
 	}
 
 }
