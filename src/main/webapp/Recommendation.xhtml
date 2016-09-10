@@ -74,10 +74,9 @@
 		<br/>
 		<br/>
 		<p:dataTable value="#{recommendationBean.nearestNeighbours}"
-			var="travelCase" rowIndexVar="index" id="resultTable"
-			rendered="#{!recommendationBean.nearestNeighbours.isEmpty()}">
+			var="travelCase" rowIndexVar="index" id="resultTable">
 			<f:facet name="header">
-       	 Recommendated Travel Plans
+       	 Recommended Travel Plans
     </f:facet>
 			<p:column headerText="Index">
 				<h:outputText value="#{index +1}" />
