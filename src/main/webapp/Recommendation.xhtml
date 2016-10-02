@@ -10,7 +10,7 @@
 <h:head>
 </h:head>
 <h:body>
-	<h1>Please enter the details for desired travel.</h1>
+	<h1>Global Travel</h1>
 	<h:form>
 		<p:panel id="panel" header="Travel Details">
 			<div>
@@ -34,13 +34,13 @@
 					label="Number of Persons:" />
 				<p:outputLabel value="Region: " for="region">
 				</p:outputLabel>
-				<p:selectOneMenu required="true"
+				<p:selectOneMenu
 					value="#{recommendationBean.region}" id="region">
 					<f:selectItems value="#{recommendationBean.regionValueList}" />
 				</p:selectOneMenu>
 				<p:outputLabel value="Transportation: " for="trans">
 				</p:outputLabel>
-				<p:selectOneMenu required="true"
+				<p:selectOneMenu 
 					value="#{recommendationBean.transportation}" id="trans">
 					<f:selectItems
 						value="#{recommendationBean.transportationValueList}" />
@@ -51,20 +51,16 @@
 					id="duration" />
 				<p:outputLabel value="Season: " for="season">
 				</p:outputLabel>
-				<p:selectOneMenu required="true"
+				<p:selectOneMenu 
 					value="#{recommendationBean.season}" id="season">
 					<f:selectItems value="#{recommendationBean.seasonValueList}" />
 				</p:selectOneMenu>
 				<p:outputLabel value="Accommodation: " for="acco">
 				</p:outputLabel>
-				<p:selectOneMenu required="true"
+				<p:selectOneMenu 
 					value="#{recommendationBean.accommodation}" id="acco">
 					<f:selectItems value="#{recommendationBean.accommodationValueList}" />
 				</p:selectOneMenu>
-				<p:outputLabel value="Hotel: " for="hotel">
-				</p:outputLabel>
-				<p:inputText required="true" value="#{recommendationBean.hotel}"
-					id="hotel" />
 			</h:panelGrid>
 		</p:panel>
 		<div>

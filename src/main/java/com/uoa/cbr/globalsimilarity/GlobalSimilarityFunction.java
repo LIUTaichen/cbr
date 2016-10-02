@@ -20,15 +20,14 @@ import com.uoa.cbr.localsimilarity.similarityfunctions.TransportationSimilarity;
 public class GlobalSimilarityFunction {
 
 	private int hotelWeight = 1;
-	private int regionWeight = 1;
-	private int accommodationWeight = 2;
 	private int transportWeight = 3;
 	private int seasonWeight = 3;
 	private int durationWeight = 5;
 	private int holidayTypeWeight = 5;
 	private int numberOfPersonsWeight = 8;
 	private int priceWeight = 8;
-
+	private int regionWeight = 8;
+	private int accommodationWeight = 8;
 	@Autowired
 	private AccommodationSimilarity accommodationSimilarity;
 	@Autowired
@@ -55,7 +54,7 @@ public class GlobalSimilarityFunction {
 						* durationWeight
 				+ holidayTypeSimilarity.getSimilarity(targetCase.getHolidayType(), sourceCase.getHolidayType())
 						* holidayTypeWeight
-				+ hotelSimilarity.getSimilarity(targetCase.getHotel(), sourceCase.getHotel()) * hotelWeight
+				//+ hotelSimilarity.getSimilarity(targetCase.getHotel(), sourceCase.getHotel()) * hotelWeight
 				+ numberOfPersonsSimilarity.getSimilarity(targetCase.getNumberOfPersons() + "",
 						sourceCase.getNumberOfPersons() + "") * numberOfPersonsWeight
 				+ priceSimilarity.getSimilarity(targetCase.getPrice() + "", sourceCase.getPrice() + "") * priceWeight

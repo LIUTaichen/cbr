@@ -35,7 +35,7 @@ public class RecommendationBean {
 	
 	private Integer price;
 	
-	private Integer numberOfPersons;
+	private Integer numberOfPersons = 0;
 	
 	private String region;
 	
@@ -93,7 +93,6 @@ public class RecommendationBean {
 		targetCase.setAccommodation(accommodation);
 		targetCase.setDuration(duration);
 		targetCase.setHolidayType(holidayType);
-		targetCase.setHotel(hotel);
 		targetCase.setNumberOfPersons(numberOfPersons);
 		targetCase.setPrice(price);
 		targetCase.setRegion(region);
